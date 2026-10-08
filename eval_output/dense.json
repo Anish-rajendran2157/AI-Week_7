@@ -1,0 +1,860 @@
+{
+  "summary": {
+    "mode": "dense",
+    "dense_backend": "pinecone",
+    "n_questions": 16,
+    "hit_rate@3": 0.9375,
+    "hits@3": 15,
+    "hit_rate@1": 0.6875,
+    "hit_rate@10": 1.0,
+    "mrr@10": 0.8125,
+    "retrieval_failures": 1,
+    "generation_failures": 1,
+    "successes": 14,
+    "generation_run": true
+  },
+  "rows": [
+    {
+      "qid": "Q01",
+      "question": "What are the type and default value of retry_backoff_ms on Client.send()?",
+      "ground_truth": "int, default 500 (ms).",
+      "gold_page_ids": [
+        "v3-client"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "Type: `int`, Default value: `2000`",
+      "answer_correct": false,
+      "classification": "GENERATION_FAILURE",
+      "retrieved": [
+        {
+          "chunk_id": "v3-client_chunk_3",
+          "page_id": "v3-client",
+          "score": 0.7526,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "| retry_backoff_ms | int | 500 | no | Base delay in milliseconds for exponential backoff between retries. | Setting `max_retries=0` at construction time disables all automatic retries; the client will then surface transport errors immediately. ## Client.send() `Client.send()` performs a single HTTP request and returns a `Response`. | Parameter | Type | Default | Required | Description |"
+        },
+        {
+          "chunk_id": "v2-client_chunk_2",
+          "page_id": "v2-client",
+          "score": 0.6796,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "seconds. | | max_retries | int | 5 | no | Automatic retries per request. Set to 0 to disable retries entirely. | | retry_backoff_ms | int | 2000 | no | Base delay in milliseconds for exponential backoff between retries. | Setting `max_retries=0` disables all automatic retries. ## Client.request() `Client.request()` performs a single HTTP request and returns a response object. | Parameter | Type"
+        },
+        {
+          "chunk_id": "v2-client_chunk_3",
+          "page_id": "v2-client",
+          "score": 0.6413,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "performs a single HTTP request and returns a response object. | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | url | str | — | yes | Path relative to the configured base_url. | | method | str | \"GET\" | no | HTTP verb to use for the request. | | retry_backoff_ms | int | 2000 | no | Overrides the client-level backoff delay for this request only. | ```python response ="
+        }
+      ]
+    },
+    {
+      "qid": "Q02",
+      "question": "Which exception does the SDK raise on HTTP 429 and what attribute carries the wait time?",
+      "ground_truth": "RateLimitError; retry_after_seconds.",
+      "gold_page_ids": [
+        "v3-errors"
+      ],
+      "gold_rank_in_pool": 6,
+      "retrieval_hit@3": false,
+      "answer": "The SDK raises a **`RateLimitError`** when it receives an HTTP 429 response, and the exception’s **`retry_after`** attribute contains the wait‑time that the caller should respect.",
+      "answer_correct": false,
+      "classification": "RETRIEVAL_FAILURE",
+      "retrieved": [
+        {
+          "chunk_id": "v2-errors_chunk_1",
+          "page_id": "v2-errors",
+          "score": 0.6623,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": false,
+          "text": "| no | | NotFoundError | Resource does not exist | no | | TooManyRequestsError | HTTP 429 returned by the API | yes, after delay | | ServerError | HTTP 5xx returned by the API | yes | ## TooManyRequestsError When the service returns HTTP 429 in SDK v2 the SDK raises `TooManyRequestsError`. The exception does not expose a parsed retry delay; callers must read the raw `Retry-After` header from the"
+        },
+        {
+          "chunk_id": "v3-errors_chunk_1",
+          "page_id": "v3-errors",
+          "score": 0.5847,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "nticationError | Token missing or invalid | no | | PermissionDeniedError | Token lacks required scope | no | | NotFoundError | Resource does not exist | no | | RateLimitError | HTTP 429 returned by the API | yes, after delay | | ServerError | HTTP 5xx returned by the API | yes | ## RateLimitError When the service returns HTTP 429 the SDK raises `RateLimitError`. The exception carries a"
+        },
+        {
+          "chunk_id": "v3-ratelimits_chunk_1",
+          "page_id": "v3-ratelimits",
+          "score": 0.5371,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "10 | | Team | 600 | 100 | | Enterprise | 6000 | custom | The free tier allows 60 requests per minute with a burst allowance of 10 requests. ## Headers Every response carries `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers describing your current budget. ## Handling HTTP 429 On HTTP 429, wait for the duration given by `Retry-After`. The SDK's built-in retry policy"
+        }
+      ]
+    },
+    {
+      "qid": "Q03",
+      "question": "What is the maximum file size accepted by uploads in v3?",
+      "ground_truth": "25 MB (max_file_size_mb=25).",
+      "gold_page_ids": [
+        "v3-files"
+      ],
+      "gold_rank_in_pool": 2,
+      "retrieval_hit@3": true,
+      "answer": "The maximum file size accepted by uploads in v3 is **25 MB**.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v2-uploads_chunk_1",
+          "page_id": "v2-uploads",
+          "score": 0.7014,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": false,
+          "text": "| max_file_size_mb | int | 10 | no | Maximum accepted upload size in megabytes; larger files raise `PayloadTooLargeError`. | | mime_type | str | auto-detected | no | MIME type sent with the upload. | The default maximum file size in v2 is 10 MB. ```python client.upload_file(file_path=\"report.pdf\") ```"
+        },
+        {
+          "chunk_id": "v3-files_chunk_1",
+          "page_id": "v3-files",
+          "score": 0.6612,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": true,
+          "text": "| max_file_size_mb | int | 25 | no | Maximum accepted upload size in megabytes; larger files raise `PayloadTooLargeError`. | | part_size_mb | int | 5 | no | Size of each multipart chunk when uploading large files. | The default maximum upload size is 25 MB; larger files must use multipart mode, which activates automatically above `part_size_mb`. ```python"
+        },
+        {
+          "chunk_id": "v3-files_chunk_0",
+          "page_id": "v3-files",
+          "score": 0.6058,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": true,
+          "text": "# Acme SDK v3 — File uploads page_id: v3-files sdk_version: v3 page_type: reference # File uploads Uploads in SDK v3 go through `Client.files.upload()`. ## Upload parameters | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | file_path | str | — | yes | Local path of the file to upload. | | max_file_size_mb | int | 25 | no | Maximum accepted upload size in megabytes;"
+        }
+      ]
+    },
+    {
+      "qid": "Q04",
+      "question": "How do I verify a webhook signature in v3?",
+      "ground_truth": "Call acme.webhooks.verify_signature() with the raw body, the X-Acme-Signature header and the signing secret.",
+      "gold_page_ids": [
+        "v3-webhooks"
+      ],
+      "gold_rank_in_pool": 2,
+      "retrieval_hit@3": true,
+      "answer": "To verify a webhook signature in v3 you simply call the helper provided by the SDK.  \nThe function checks the `X‑Acme‑Signature` header, validates the HMAC‑SHA256 against the\nraw request body, and also enforces the maximum age (`tolerance_seconds`) and the\nsignature scheme prefix (`scheme`).\n\n```python\nfrom acme.webhooks import verify_signature\n\n# raw_body – the raw bytes of the incoming HTTP request body\n# request.headers[\"X-Acme-Signature\"] – the signature string sent in the header\n# WEBHOOK_SIGNING_SECRET – the secret you configured for your endpoint\n\nverify_signature(\n    payload=raw_body,                          # raw request body (bytes or str)\n    signature_header=request.headers[\"X-Acme-Signature\"],\n    secret=WEBHOOK_SIGNING_SECRET,             # your signing secret\n    tolerance_seconds=300,                     # optional – default 300s\n    scheme=\"v3\",                               # optional – default \"v3\"\n)\n```\n\nIf the function returns without raising an error, the signature is valid.  \nIf the signature is missing, malformed, or the delivery is older than\n`tolerance_seconds`, the function raises an exception, letting you reject\nthe payload.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-webhooks_chunk_0",
+          "page_id": "v3-webhooks",
+          "score": 0.6565,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v3 — Webhooks page_id: v3-webhooks sdk_version: v3 page_type: reference # Webhooks Webhooks push Acme platform events to an HTTPS endpoint you control. ## Signature verification Every delivery includes an `X-Acme-Signature` header containing an HMAC-SHA256 signature of the raw request body, keyed with your endpoint's signing secret. Verify the signature before trusting a payload."
+        },
+        {
+          "chunk_id": "v3-webhooks_chunk_1",
+          "page_id": "v3-webhooks",
+          "score": 0.6324,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": true,
+          "text": "your endpoint's signing secret. Verify the signature before trusting a payload. ```python from acme.webhooks import verify_signature verify_signature( payload=raw_body, signature_header=request.headers[\"X-Acme-Signature\"], secret=WEBHOOK_SIGNING_SECRET, ) ``` ## Verification parameters | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | tolerance_seconds | int | 300 |"
+        },
+        {
+          "chunk_id": "v3-webhooks_chunk_2",
+          "page_id": "v3-webhooks",
+          "score": 0.3394,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "Required | Description | |---|---|---|---|---| | tolerance_seconds | int | 300 | no | Maximum allowed age of a delivery before it is rejected as stale. | | scheme | str | \"v3\" | no | Signature scheme prefix expected in the header. | Deliveries older than `tolerance_seconds` fail verification; this protects you against replay attacks. ## Retries Failed deliveries are retried up to five times over"
+        }
+      ]
+    },
+    {
+      "qid": "Q05",
+      "question": "What is the default buffer_size_ms for streaming?",
+      "ground_truth": "250 ms.",
+      "gold_page_ids": [
+        "v3-streaming"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "The default `buffer_size_ms` for streaming is **250**.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-streaming_chunk_1",
+          "page_id": "v3-streaming",
+          "score": 0.5027,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "stays open until the server closes it or the iterator is closed by the caller. | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | url | str | — | yes | Path of the streaming endpoint relative to base_url. | | buffer_size_ms | int | 250 | no | Server-side buffering window in milliseconds before each event batch is flushed. | | heartbeat_interval_ms | int | 15000 | no |"
+        },
+        {
+          "chunk_id": "v3-files_chunk_1",
+          "page_id": "v3-files",
+          "score": 0.4572,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "| max_file_size_mb | int | 25 | no | Maximum accepted upload size in megabytes; larger files raise `PayloadTooLargeError`. | | part_size_mb | int | 5 | no | Size of each multipart chunk when uploading large files. | The default maximum upload size is 25 MB; larger files must use multipart mode, which activates automatically above `part_size_mb`. ```python"
+        },
+        {
+          "chunk_id": "v2-uploads_chunk_1",
+          "page_id": "v2-uploads",
+          "score": 0.4567,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "| max_file_size_mb | int | 10 | no | Maximum accepted upload size in megabytes; larger files raise `PayloadTooLargeError`. | | mime_type | str | auto-detected | no | MIME type sent with the upload. | The default maximum file size in v2 is 10 MB. ```python client.upload_file(file_path=\"report.pdf\") ```"
+        }
+      ]
+    },
+    {
+      "qid": "Q06",
+      "question": "How many requests per minute does the free tier allow?",
+      "ground_truth": "60 requests per minute (burst 10).",
+      "gold_page_ids": [
+        "v3-ratelimits"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "60 requests per minute.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-ratelimits_chunk_1",
+          "page_id": "v3-ratelimits",
+          "score": 0.7983,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "10 | | Team | 600 | 100 | | Enterprise | 6000 | custom | The free tier allows 60 requests per minute with a burst allowance of 10 requests. ## Headers Every response carries `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers describing your current budget. ## Handling HTTP 429 On HTTP 429, wait for the duration given by `Retry-After`. The SDK's built-in retry policy"
+        },
+        {
+          "chunk_id": "v3-ratelimits_chunk_0",
+          "page_id": "v3-ratelimits",
+          "score": 0.5902,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": true,
+          "text": "# Acme SDK v3 — Rate limits page_id: v3-ratelimits sdk_version: v3 page_type: guide # Rate limits Rate limits cap how many requests an account can make per minute. Limits are enforced per API token, not per IP address. ## Limit tiers | Tier | Requests per minute | Burst allowance | |---|---|---| | Free | 60 | 10 | | Team | 600 | 100 | | Enterprise | 6000 | custom | The free tier allows 60"
+        },
+        {
+          "chunk_id": "v2-client_chunk_2",
+          "page_id": "v2-client",
+          "score": 0.4591,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "seconds. | | max_retries | int | 5 | no | Automatic retries per request. Set to 0 to disable retries entirely. | | retry_backoff_ms | int | 2000 | no | Base delay in milliseconds for exponential backoff between retries. | Setting `max_retries=0` disables all automatic retries. ## Client.request() `Client.request()` performs a single HTTP request and returns a response object. | Parameter | Type"
+        }
+      ]
+    },
+    {
+      "qid": "Q07",
+      "question": "How do I disable automatic retries when creating the client?",
+      "ground_truth": "Pass max_retries=0 to the Client constructor.",
+      "gold_page_ids": [
+        "v3-client",
+        "v3-errors"
+      ],
+      "gold_rank_in_pool": 2,
+      "retrieval_hit@3": true,
+      "answer": "Pass `max_retries=0` when you instantiate the client. Setting `max_retries` to zero disables all automatic retries, so the first failure will be raised immediately.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v2-client_chunk_2",
+          "page_id": "v2-client",
+          "score": 0.5267,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": false,
+          "text": "seconds. | | max_retries | int | 5 | no | Automatic retries per request. Set to 0 to disable retries entirely. | | retry_backoff_ms | int | 2000 | no | Base delay in milliseconds for exponential backoff between retries. | Setting `max_retries=0` disables all automatic retries. ## Client.request() `Client.request()` performs a single HTTP request and returns a response object. | Parameter | Type"
+        },
+        {
+          "chunk_id": "v3-client_chunk_3",
+          "page_id": "v3-client",
+          "score": 0.4319,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": true,
+          "text": "| retry_backoff_ms | int | 500 | no | Base delay in milliseconds for exponential backoff between retries. | Setting `max_retries=0` at construction time disables all automatic retries; the client will then surface transport errors immediately. ## Client.send() `Client.send()` performs a single HTTP request and returns a `Response`. | Parameter | Type | Default | Required | Description |"
+        },
+        {
+          "chunk_id": "v3-errors_chunk_3",
+          "page_id": "v3-errors",
+          "score": 0.368,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": true,
+          "text": "es\") except RateLimitError as exc: print(f\"wait {exc.retry_after_seconds}s\") ``` ## Disabling automatic error retries Automatic retries apply only to retryable errors listed in the table above. Passing `max_retries=0` when constructing the client disables them; the first failure is then raised directly to the caller."
+        }
+      ]
+    },
+    {
+      "qid": "Q08",
+      "question": "Which environment variable holds the API token?",
+      "ground_truth": "ACME_API_TOKEN.",
+      "gold_page_ids": [
+        "v3-client"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "ACME_API_TOKEN",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-client_chunk_1",
+          "page_id": "v3-client",
+          "score": 0.4364,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "he `ACME_API_TOKEN` environment variable. Tokens must not be committed to source control. A missing token raises `AuthenticationError` before any network request is sent. ```python from acme import Client client = Client() # reads ACME_API_TOKEN ``` ## Client constructor parameters | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | base_url | str |"
+        },
+        {
+          "chunk_id": "v3-client_chunk_0",
+          "page_id": "v3-client",
+          "score": 0.4244,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": true,
+          "text": "# Acme SDK v3 — Client page_id: v3-client sdk_version: v3 page_type: reference # Client The `Client` is the entry point of the Acme SDK. It manages authentication, connection pooling, and retry policy for every request your application sends. ## Authentication Create the client with an API token supplied through the `ACME_API_TOKEN` environment variable. Tokens must not be committed to source"
+        },
+        {
+          "chunk_id": "v2-client_chunk_0",
+          "page_id": "v2-client",
+          "score": 0.3787,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v2 — Client page_id: v2-client sdk_version: v2 page_type: reference # Client The `Client` is the entry point of the Acme SDK. It manages authentication, connection pooling, and retry policy. ## Authentication Create the client with an API token supplied through the `ACME_API_TOKEN` environment variable. A missing token raises `AuthenticationError` before any network request is sent. ##"
+        }
+      ]
+    },
+    {
+      "qid": "Q09",
+      "question": "What is the default heartbeat_interval_ms on a stream?",
+      "ground_truth": "15000 ms.",
+      "gold_page_ids": [
+        "v3-streaming"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "The default value for **heartbeat_interval_ms** on a stream is **15000 ms**.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-streaming_chunk_1",
+          "page_id": "v3-streaming",
+          "score": 0.6008,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "stays open until the server closes it or the iterator is closed by the caller. | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | url | str | — | yes | Path of the streaming endpoint relative to base_url. | | buffer_size_ms | int | 250 | no | Server-side buffering window in milliseconds before each event batch is flushed. | | heartbeat_interval_ms | int | 15000 | no |"
+        },
+        {
+          "chunk_id": "v3-streaming_chunk_2",
+          "page_id": "v3-streaming",
+          "score": 0.5556,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": true,
+          "text": "fore each event batch is flushed. | | heartbeat_interval_ms | int | 15000 | no | Interval between keep-alive heartbeat frames on the idle stream. | Lowering `buffer_size_ms` reduces end-to-end latency at the cost of more, smaller network writes. ```python with client.stream(url=\"/v3/events\") as events: for event in events: print(event.type, event.data) ``` ## Reconnection If the stream drops, the"
+        },
+        {
+          "chunk_id": "v3-streaming_chunk_0",
+          "page_id": "v3-streaming",
+          "score": 0.3436,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v3 — Streaming page_id: v3-streaming sdk_version: v3 page_type: reference # Streaming responses Streaming delivers server-sent events (SSE) as they are produced instead of waiting for the full response body. ## Client.stream() `Client.stream()` returns an iterator of `StreamEvent` objects. The connection stays open until the server closes it or the iterator is closed by the caller. |"
+        }
+      ]
+    },
+    {
+      "qid": "Q10",
+      "question": "What is the default tolerance_seconds when verifying webhooks and why does it exist?",
+      "ground_truth": "300 seconds; stale deliveries are rejected to protect against replay attacks.",
+      "gold_page_ids": [
+        "v3-webhooks"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "The default value for `tolerance_seconds` is **300 seconds** (5 minutes).  \nIt exists to limit how far back a webhook payload can be accepted: if a delivery’s timestamp is older than 300 seconds, the signature verification fails. This protects against replay attacks by rejecting stale requests.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-webhooks_chunk_1",
+          "page_id": "v3-webhooks",
+          "score": 0.5248,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "your endpoint's signing secret. Verify the signature before trusting a payload. ```python from acme.webhooks import verify_signature verify_signature( payload=raw_body, signature_header=request.headers[\"X-Acme-Signature\"], secret=WEBHOOK_SIGNING_SECRET, ) ``` ## Verification parameters | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | tolerance_seconds | int | 300 |"
+        },
+        {
+          "chunk_id": "v3-webhooks_chunk_2",
+          "page_id": "v3-webhooks",
+          "score": 0.4917,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": true,
+          "text": "Required | Description | |---|---|---|---|---| | tolerance_seconds | int | 300 | no | Maximum allowed age of a delivery before it is rejected as stale. | | scheme | str | \"v3\" | no | Signature scheme prefix expected in the header. | Deliveries older than `tolerance_seconds` fail verification; this protects you against replay attacks. ## Retries Failed deliveries are retried up to five times over"
+        },
+        {
+          "chunk_id": "v3-webhooks_chunk_0",
+          "page_id": "v3-webhooks",
+          "score": 0.4418,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v3 — Webhooks page_id: v3-webhooks sdk_version: v3 page_type: reference # Webhooks Webhooks push Acme platform events to an HTTPS endpoint you control. ## Signature verification Every delivery includes an `X-Acme-Signature` header containing an HMAC-SHA256 signature of the raw request body, keyed with your endpoint's signing secret. Verify the signature before trusting a payload."
+        }
+      ]
+    },
+    {
+      "qid": "Q11",
+      "question": "Which header lets a dropped stream replay events it missed?",
+      "ground_truth": "Last-Event-ID.",
+      "gold_page_ids": [
+        "v3-streaming"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "The **`Last-Event-ID`** header allows a dropped stream to request and replay the events it missed.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-streaming_chunk_3",
+          "page_id": "v3-streaming",
+          "score": 0.5596,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "ents: print(event.type, event.data) ``` ## Reconnection If the stream drops, the SDK reconnects automatically with exponential backoff and replays events missed while offline when the endpoint supports the `Last-Event-ID` header."
+        },
+        {
+          "chunk_id": "v3-streaming_chunk_0",
+          "page_id": "v3-streaming",
+          "score": 0.4316,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v3 — Streaming page_id: v3-streaming sdk_version: v3 page_type: reference # Streaming responses Streaming delivers server-sent events (SSE) as they are produced instead of waiting for the full response body. ## Client.stream() `Client.stream()` returns an iterator of `StreamEvent` objects. The connection stays open until the server closes it or the iterator is closed by the caller. |"
+        },
+        {
+          "chunk_id": "v3-webhooks_chunk_3",
+          "page_id": "v3-webhooks",
+          "score": 0.3662,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "t replay attacks. ## Retries Failed deliveries are retried up to five times over six hours with exponential backoff. An endpoint is disabled after 20 consecutive failures."
+        }
+      ]
+    },
+    {
+      "qid": "Q12",
+      "question": "What should I use instead of paginate_auto() in v3?",
+      "ground_truth": "Explicit cursor pagination via list_after().",
+      "gold_page_ids": [
+        "v3-changelog",
+        "v2-pagination"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "Use explicit cursor pagination with `list_after()` in SDK v3.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v2-pagination_chunk_1",
+          "page_id": "v2-pagination",
+          "score": 0.5587,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "ameter | Type | Default | Required | Description | |---|---|---|---|---| | url | str | — | yes | List endpoint path relative to base_url. | | page_size | int | 100 | no | Number of items requested per page. | ```python for invoice in client.paginate_auto(url=\"/v2/invoices\"): print(invoice.id) ``` `paginate_auto()` was removed in SDK v3; use explicit cursor pagination via `list_after()` instead."
+        },
+        {
+          "chunk_id": "v2-pagination_chunk_0",
+          "page_id": "v2-pagination",
+          "score": 0.5355,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v2 — Pagination page_id: v2-pagination sdk_version: v2 page_type: reference # Pagination List endpoints in SDK v2 return full pages with automatic pagination helpers. ## paginate_auto() `paginate_auto()` walks every page of a collection and yields items one by one until the collection is exhausted. | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | url |"
+        },
+        {
+          "chunk_id": "v3-changelog_chunk_2",
+          "page_id": "v3-changelog",
+          "score": 0.4474,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": true,
+          "text": "econds (`timeout_ms=10000`). ## Removed APIs `Client.request()` was removed; use `Client.send()`. `paginate_auto()` was removed in favor of explicit cursor pagination via `list_after()`."
+        }
+      ]
+    },
+    {
+      "qid": "Q13",
+      "question": "What is the default request timeout in v3 and which option sets it?",
+      "ground_truth": "timeout_ms, default 10000 ms (10 s).",
+      "gold_page_ids": [
+        "v3-client",
+        "v3-changelog"
+      ],
+      "gold_rank_in_pool": 3,
+      "retrieval_hit@3": true,
+      "answer": "The default request timeout in v3 is **10 seconds** (i.e., **10000 ms**), and it is set via the **`timeout_ms`** option.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v2-client_chunk_2",
+          "page_id": "v2-client",
+          "score": 0.5254,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": false,
+          "text": "seconds. | | max_retries | int | 5 | no | Automatic retries per request. Set to 0 to disable retries entirely. | | retry_backoff_ms | int | 2000 | no | Base delay in milliseconds for exponential backoff between retries. | Setting `max_retries=0` disables all automatic retries. ## Client.request() `Client.request()` performs a single HTTP request and returns a response object. | Parameter | Type"
+        },
+        {
+          "chunk_id": "v3-ratelimits_chunk_1",
+          "page_id": "v3-ratelimits",
+          "score": 0.5129,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "10 | | Team | 600 | 100 | | Enterprise | 6000 | custom | The free tier allows 60 requests per minute with a burst allowance of 10 requests. ## Headers Every response carries `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers describing your current budget. ## Handling HTTP 429 On HTTP 429, wait for the duration given by `Retry-After`. The SDK's built-in retry policy"
+        },
+        {
+          "chunk_id": "v3-changelog_chunk_1",
+          "page_id": "v3-changelog",
+          "score": 0.503,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": true,
+          "text": "worst-case recovery time after a transient failure. Code that relied on the old default should set `retry_backoff_ms=2000` explicitly. ## Timeout units renamed Constructor option `timeout_s` is now `timeout_ms`; all durations in the SDK are milliseconds. The default timeout dropped from 30 seconds to 10 seconds (`timeout_ms=10000`). ## Removed APIs `Client.request()` was removed; use"
+        }
+      ]
+    },
+    {
+      "qid": "Q14",
+      "question": "How long can an interrupted multipart upload be resumed, and with what value?",
+      "ground_truth": "Within 24 hours, by passing the returned upload_id back to Client.files.upload().",
+      "gold_page_ids": [
+        "v3-files"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "An interrupted multipart upload can be resumed **within 24 hours** by passing the returned **`upload_id`** back to `Client.files.upload()`.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-files_chunk_2",
+          "page_id": "v3-files",
+          "score": 0.6942,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "se multipart mode, which activates automatically above `part_size_mb`. ```python client.files.upload(file_path=\"dataset.csv\", max_file_size_mb=25) ``` ## Resumable uploads Interrupted multipart uploads can be resumed within 24 hours by passing the returned `upload_id` back to `Client.files.upload()`."
+        },
+        {
+          "chunk_id": "v3-files_chunk_1",
+          "page_id": "v3-files",
+          "score": 0.5344,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "| max_file_size_mb | int | 25 | no | Maximum accepted upload size in megabytes; larger files raise `PayloadTooLargeError`. | | part_size_mb | int | 5 | no | Size of each multipart chunk when uploading large files. | The default maximum upload size is 25 MB; larger files must use multipart mode, which activates automatically above `part_size_mb`. ```python"
+        },
+        {
+          "chunk_id": "v2-uploads_chunk_1",
+          "page_id": "v2-uploads",
+          "score": 0.443,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "| max_file_size_mb | int | 10 | no | Maximum accepted upload size in megabytes; larger files raise `PayloadTooLargeError`. | | mime_type | str | auto-detected | no | MIME type sent with the upload. | The default maximum file size in v2 is 10 MB. ```python client.upload_file(file_path=\"report.pdf\") ```"
+        }
+      ]
+    },
+    {
+      "qid": "Q15",
+      "question": "Which response header tells me how many requests I have left?",
+      "ground_truth": "X-RateLimit-Remaining.",
+      "gold_page_ids": [
+        "v3-ratelimits"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "The header that indicates how many requests you have left is:\n\n**`X-RateLimit-Remaining`**",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-ratelimits_chunk_1",
+          "page_id": "v3-ratelimits",
+          "score": 0.594,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "10 | | Team | 600 | 100 | | Enterprise | 6000 | custom | The free tier allows 60 requests per minute with a burst allowance of 10 requests. ## Headers Every response carries `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and `X-RateLimit-Reset` headers describing your current budget. ## Handling HTTP 429 On HTTP 429, wait for the duration given by `Retry-After`. The SDK's built-in retry policy"
+        },
+        {
+          "chunk_id": "v2-client_chunk_2",
+          "page_id": "v2-client",
+          "score": 0.4955,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "seconds. | | max_retries | int | 5 | no | Automatic retries per request. Set to 0 to disable retries entirely. | | retry_backoff_ms | int | 2000 | no | Base delay in milliseconds for exponential backoff between retries. | Setting `max_retries=0` disables all automatic retries. ## Client.request() `Client.request()` performs a single HTTP request and returns a response object. | Parameter | Type"
+        },
+        {
+          "chunk_id": "v2-client_chunk_3",
+          "page_id": "v2-client",
+          "score": 0.4691,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "performs a single HTTP request and returns a response object. | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | url | str | — | yes | Path relative to the configured base_url. | | method | str | \"GET\" | no | HTTP verb to use for the request. | | retry_backoff_ms | int | 2000 | no | Overrides the client-level backoff delay for this request only. | ```python response ="
+        }
+      ]
+    },
+    {
+      "qid": "Q16",
+      "question": "How many consecutive failed deliveries before a webhook endpoint is disabled?",
+      "ground_truth": "20 consecutive failures.",
+      "gold_page_ids": [
+        "v3-webhooks"
+      ],
+      "gold_rank_in_pool": 1,
+      "retrieval_hit@3": true,
+      "answer": "20 consecutive failed deliveries.",
+      "answer_correct": true,
+      "classification": "SUCCESS",
+      "retrieved": [
+        {
+          "chunk_id": "v3-webhooks_chunk_3",
+          "page_id": "v3-webhooks",
+          "score": 0.5232,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": true,
+          "text": "t replay attacks. ## Retries Failed deliveries are retried up to five times over six hours with exponential backoff. An endpoint is disabled after 20 consecutive failures."
+        },
+        {
+          "chunk_id": "v3-webhooks_chunk_2",
+          "page_id": "v3-webhooks",
+          "score": 0.4901,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "Required | Description | |---|---|---|---|---| | tolerance_seconds | int | 300 | no | Maximum allowed age of a delivery before it is rejected as stale. | | scheme | str | \"v3\" | no | Signature scheme prefix expected in the header. | Deliveries older than `tolerance_seconds` fail verification; this protects you against replay attacks. ## Retries Failed deliveries are retried up to five times over"
+        },
+        {
+          "chunk_id": "v3-errors_chunk_2",
+          "page_id": "v3-errors",
+          "score": 0.4558,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "ervice returns HTTP 429 the SDK raises `RateLimitError`. The exception carries a `retry_after_seconds` attribute parsed from the server's `Retry-After` header, so callers can wait exactly as long as the server asks before trying again. ```python from acme.errors import RateLimitError try: client.send(url=\"/v3/invoices\") except RateLimitError as exc: print(f\"wait {exc.retry_after_seconds}s\") ```"
+        }
+      ]
+    }
+  ],
+  "refusals": [
+    {
+      "qid": "R01",
+      "question": "How do I rotate my account password with the SDK?",
+      "ground_truth": "Refuse: Password management is documented nowhere in the corpus.",
+      "answer": "I cannot answer this based on the provided documents.",
+      "classification": "SUCCESS (refused)",
+      "retrieved": [
+        {
+          "chunk_id": "v3-changelog_chunk_0",
+          "page_id": "v3-changelog",
+          "score": 0.2579,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v3 — Changelog (v3.0) page_id: v3-changelog sdk_version: v3 page_type: changelog # What changed in v3 This page lists behavioral changes between SDK v2 and SDK v3. Read it before migrating. ## Retry defaults changed The default retry backoff delay was reduced from 2000 ms in v2 to 500 ms in v3, cutting worst-case recovery time after a transient failure. Code that relied on the old"
+        },
+        {
+          "chunk_id": "v2-client_chunk_0",
+          "page_id": "v2-client",
+          "score": 0.2524,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v2 — Client page_id: v2-client sdk_version: v2 page_type: reference # Client The `Client` is the entry point of the Acme SDK. It manages authentication, connection pooling, and retry policy. ## Authentication Create the client with an API token supplied through the `ACME_API_TOKEN` environment variable. A missing token raises `AuthenticationError` before any network request is sent. ##"
+        },
+        {
+          "chunk_id": "v3-client_chunk_0",
+          "page_id": "v3-client",
+          "score": 0.2434,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v3 — Client page_id: v3-client sdk_version: v3 page_type: reference # Client The `Client` is the entry point of the Acme SDK. It manages authentication, connection pooling, and retry policy for every request your application sends. ## Authentication Create the client with an API token supplied through the `ACME_API_TOKEN` environment variable. Tokens must not be committed to source"
+        }
+      ]
+    },
+    {
+      "qid": "R02",
+      "question": "Does the SDK publish events to Kafka for stream processing?",
+      "ground_truth": "Refuse: Kafka integration appears nowhere in the corpus.",
+      "answer": "I cannot answer this based on the provided documents.",
+      "classification": "SUCCESS (refused)",
+      "retrieved": [
+        {
+          "chunk_id": "v3-streaming_chunk_3",
+          "page_id": "v3-streaming",
+          "score": 0.4787,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": false,
+          "text": "ents: print(event.type, event.data) ``` ## Reconnection If the stream drops, the SDK reconnects automatically with exponential backoff and replays events missed while offline when the endpoint supports the `Last-Event-ID` header."
+        },
+        {
+          "chunk_id": "v3-streaming_chunk_0",
+          "page_id": "v3-streaming",
+          "score": 0.4014,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v3 — Streaming page_id: v3-streaming sdk_version: v3 page_type: reference # Streaming responses Streaming delivers server-sent events (SSE) as they are produced instead of waiting for the full response body. ## Client.stream() `Client.stream()` returns an iterator of `StreamEvent` objects. The connection stays open until the server closes it or the iterator is closed by the caller. |"
+        },
+        {
+          "chunk_id": "v3-streaming_chunk_2",
+          "page_id": "v3-streaming",
+          "score": 0.37,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "fore each event batch is flushed. | | heartbeat_interval_ms | int | 15000 | no | Interval between keep-alive heartbeat frames on the idle stream. | Lowering `buffer_size_ms` reduces end-to-end latency at the cost of more, smaller network writes. ```python with client.stream(url=\"/v3/events\") as events: for event in events: print(event.type, event.data) ``` ## Reconnection If the stream drops, the"
+        }
+      ]
+    },
+    {
+      "qid": "R03",
+      "question": "How do I install the SDK with pip?",
+      "ground_truth": "Refuse: Installation instructions are not part of any indexed page.",
+      "answer": "I cannot answer this based on the provided documents.",
+      "classification": "SUCCESS (refused)",
+      "retrieved": [
+        {
+          "chunk_id": "v2-errors_chunk_1",
+          "page_id": "v2-errors",
+          "score": 0.2044,
+          "ranks": {
+            "dense": 1
+          },
+          "is_gold": false,
+          "text": "| no | | NotFoundError | Resource does not exist | no | | TooManyRequestsError | HTTP 429 returned by the API | yes, after delay | | ServerError | HTTP 5xx returned by the API | yes | ## TooManyRequestsError When the service returns HTTP 429 in SDK v2 the SDK raises `TooManyRequestsError`. The exception does not expose a parsed retry delay; callers must read the raw `Retry-After` header from the"
+        },
+        {
+          "chunk_id": "v2-uploads_chunk_0",
+          "page_id": "v2-uploads",
+          "score": 0.1976,
+          "ranks": {
+            "dense": 2
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v2 — File uploads page_id: v2-uploads sdk_version: v2 page_type: reference # File uploads Uploads in SDK v2 go through `Client.upload_file()`. ## Upload parameters | Parameter | Type | Default | Required | Description | |---|---|---|---|---| | file_path | str | — | yes | Local path of the file to upload. | | max_file_size_mb | int | 10 | no | Maximum accepted upload size in megabytes;"
+        },
+        {
+          "chunk_id": "v2-errors_chunk_0",
+          "page_id": "v2-errors",
+          "score": 0.183,
+          "ranks": {
+            "dense": 3
+          },
+          "is_gold": false,
+          "text": "# Acme SDK v2 — Errors page_id: v2-errors sdk_version: v2 page_type: reference # Error handling All SDK exceptions inherit from `AcmeError`. API-level failures raise subclasses of `ApiError`. ## Error class table | Exception | Raised when | Retryable | |---|---|---| | AuthenticationError | Token missing or invalid | no | | NotFoundError | Resource does not exist | no | | TooManyRequestsError |"
+        }
+      ]
+    }
+  ]
+}
