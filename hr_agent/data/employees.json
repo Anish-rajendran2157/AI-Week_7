@@ -1,0 +1,12 @@
+[
+  {"employee_id": "E101", "name": "Priya Nair",      "jurisdiction": "IN",    "employment_type": "full-time",  "fte": 1.0, "hire_date": "2025-03-10", "annual_leave_taken_days": 6,  "carry_over_days": 0, "transfer": null},
+  {"employee_id": "E102", "name": "Arjun Mehta",     "jurisdiction": "IN",    "employment_type": "full-time",  "fte": 1.0, "hire_date": "2019-06-01", "annual_leave_taken_days": 10, "carry_over_days": 3, "transfer": null},
+  {"employee_id": "E103", "name": "Oliver Grant",    "jurisdiction": "UK",    "employment_type": "full-time",  "fte": 1.0, "hire_date": "2025-01-15", "annual_leave_taken_days": 9,  "carry_over_days": 0, "transfer": null},
+  {"employee_id": "E104", "name": "Amelia Clarke",   "jurisdiction": "UK",    "employment_type": "full-time",  "fte": 1.0, "hire_date": "2020-02-01", "annual_leave_taken_days": 14, "carry_over_days": 2, "transfer": null},
+  {"employee_id": "E105", "name": "Jake Turner",     "jurisdiction": "US-CA", "employment_type": "full-time",  "fte": 1.0, "hire_date": "2026-02-02", "annual_leave_taken_days": 2,  "carry_over_days": 0, "transfer": null},
+  {"employee_id": "E106", "name": "Maria Lopez",     "jurisdiction": "US-CA", "employment_type": "full-time",  "fte": 1.0, "hire_date": "2018-08-20", "annual_leave_taken_days": 12, "carry_over_days": 5, "transfer": null},
+  {"employee_id": "E107", "name": "Wei Lim",         "jurisdiction": "SG",    "employment_type": "full-time",  "fte": 1.0, "hire_date": "2026-06-01", "annual_leave_taken_days": 1,  "carry_over_days": 0, "transfer": null},
+  {"employee_id": "E108", "name": "Karthik Raman",   "jurisdiction": "IN",    "employment_type": "full-time",  "fte": 1.0, "hire_date": "2023-09-01", "annual_leave_taken_days": 8,  "carry_over_days": 0, "transfer": {"to_jurisdiction": "UK", "effective_date": "2026-11-01"}},
+  {"employee_id": "E109", "name": "Hannah Brooks",   "jurisdiction": "UK",    "employment_type": "part-time",  "fte": 0.6, "hire_date": "2022-05-01", "annual_leave_taken_days": 5,  "carry_over_days": 0, "transfer": null},
+  {"employee_id": "E110", "name": "Sam Tan",         "jurisdiction": "SG",    "employment_type": "contractor", "fte": 1.0, "hire_date": "2025-01-06", "annual_leave_taken_days": 0,  "carry_over_days": 0, "transfer": null}
+]
