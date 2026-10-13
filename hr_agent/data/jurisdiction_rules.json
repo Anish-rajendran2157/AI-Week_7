@@ -1,0 +1,60 @@
+{
+  "IN": {
+    "annual_leave": [
+      {"rule_id": "IN-AL-1", "min_months": 0,  "max_months": 24,   "days": 18},
+      {"rule_id": "IN-AL-2", "min_months": 24, "max_months": 60,   "days": 21},
+      {"rule_id": "IN-AL-3", "min_months": 60, "max_months": null, "days": 24}
+    ],
+    "notice_period": [
+      {"rule_id": "IN-NP-1", "min_months": 0,  "max_months": 6,    "days": 15, "note": "probation"},
+      {"rule_id": "IN-NP-2", "min_months": 6,  "max_months": 24,   "days": 30},
+      {"rule_id": "IN-NP-3", "min_months": 24, "max_months": null, "days": 60}
+    ],
+    "sick_leave": [
+      {"rule_id": "IN-SL-1", "min_months": 0, "max_months": null, "days": 12}
+    ]
+  },
+  "UK": {
+    "annual_leave": [
+      {"rule_id": "UK-AL-1", "min_months": 0,  "max_months": 24,   "days": 25},
+      {"rule_id": "UK-AL-2", "min_months": 24, "max_months": null, "days": 28}
+    ],
+    "notice_period": [
+      {"rule_id": "UK-NP-1", "min_months": 0,  "max_months": 24,   "days": 28},
+      {"rule_id": "UK-NP-2", "min_months": 24, "max_months": null,
+       "formula": "7 days per completed year of service", "min_days": 28, "max_days": 84}
+    ],
+    "sick_leave": [
+      {"rule_id": "UK-SL-1", "min_months": 0,  "max_months": 24,   "days": 10},
+      {"rule_id": "UK-SL-2", "min_months": 24, "max_months": null, "days": 20}
+    ]
+  },
+  "US-CA": {
+    "annual_leave": [
+      {"rule_id": "US-AL-1", "min_months": 0,  "max_months": 12,   "days": 10},
+      {"rule_id": "US-AL-2", "min_months": 12, "max_months": 60,   "days": 15},
+      {"rule_id": "US-AL-3", "min_months": 60, "max_months": null, "days": 20}
+    ],
+    "notice_period": [
+      {"rule_id": "US-NP-1", "min_months": 0, "max_months": null, "days": 14, "note": "at-will; courtesy notice"}
+    ],
+    "sick_leave": [
+      {"rule_id": "US-SL-1", "min_months": 0, "max_months": null, "days": 5}
+    ]
+  },
+  "SG": {
+    "annual_leave": [
+      {"rule_id": "SG-AL-1", "min_months": 0,  "max_months": 24,   "days": 14},
+      {"rule_id": "SG-AL-2", "min_months": 24, "max_months": null, "days": 18}
+    ],
+    "notice_period": [
+      {"rule_id": "SG-NP-1", "min_months": 0,  "max_months": 24,   "days": 30},
+      {"rule_id": "SG-NP-2", "min_months": 24, "max_months": 60,   "days": 60},
+      {"rule_id": "SG-NP-3", "min_months": 60, "max_months": null, "days": 90}
+    ],
+    "sick_leave": [
+      {"rule_id": "SG-SL-1", "min_months": 0, "max_months": 6,    "days": 0},
+      {"rule_id": "SG-SL-2", "min_months": 6, "max_months": null, "days": 14}
+    ]
+  }
+}

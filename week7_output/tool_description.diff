@@ -1,0 +1,92 @@
+diff --git a/hr_agent/tools.py b/hr_agent/tools.py
+index 9fa45b5..73dc1ec 100644
+--- a/hr_agent/tools.py
++++ b/hr_agent/tools.py
+@@ -49,9 +49,29 @@ def search_handbook(query: str, top_k: int = 3) -> list:
+     return [{"section": h, "text": b} for _, h, b in scored[:top_k]]
+ 
+ 
++JURISDICTIONS = ["IN", "UK", "US-CA", "SG"]
++TOPICS = ["annual_leave", "notice_period", "sick_leave"]
++
++_RULES = json.loads((DATA_DIR / "jurisdiction_rules.json").read_text())
++
++
++def get_jurisdiction_rules(jurisdiction: str, topic: str) -> dict:
++    if jurisdiction not in JURISDICTIONS:
++        return {"error": f"jurisdiction must be one of {JURISDICTIONS}"}
++    if topic not in TOPICS:
++        return {"error": f"topic must be one of {TOPICS}"}
++    return {
++        "jurisdiction": jurisdiction,
++        "topic": topic,
++        "bands": "tenure in completed months; min_months inclusive, max_months exclusive, null = no upper bound",
++        "rules": _RULES[jurisdiction][topic],
++    }
++
++
+ TOOL_FUNCTIONS = {
+     "get_employee_record": get_employee_record,
+     "search_handbook": search_handbook,
++    "get_jurisdiction_rules": get_jurisdiction_rules,
+ }
+ 
+ TOOL_SCHEMAS = [
+@@ -59,12 +79,18 @@ TOOL_SCHEMAS = [
+         "type": "function",
+         "function": {
+             "name": "get_employee_record",
+-            "description": "Get information about an employee, including their leave entitlements "
+-                           "and the HR policies that apply to them.",
++            "description": "Look up one employee's personal HR record by employee ID: jurisdiction, "
++                           "employment type, FTE, tenure in completed months, annual leave taken, "
++                           "carry-over days and any approved transfer. Facts about the person only; "
++                           "contains no policy rules or entitlement amounts.",
+             "parameters": {
+                 "type": "object",
+-                "properties": {"employee_id": {"type": "string", "description": "Employee ID"}},
++                "properties": {
++                    "employee_id": {"type": "string", "pattern": "^E[0-9]{3}$",
++                                    "description": "Employee ID, e.g. E104"},
++                },
+                 "required": ["employee_id"],
++                "additionalProperties": False,
+             },
+         },
+     },
+@@ -72,11 +98,33 @@ TOOL_SCHEMAS = [
+         "type": "function",
+         "function": {
+             "name": "search_handbook",
+-            "description": "Search the HR handbook for policies, leave entitlements and employee information.",
++            "description": "Keyword search over the handbook's general policy clauses (HB-1 to HB-6: "
++                           "tenure, transfers, contractors, carry-over, probation, part-time) and return "
++                           "the matching clause text. Contains no per-jurisdiction entitlement amounts.",
+             "parameters": {
+                 "type": "object",
+-                "properties": {"query": {"type": "string", "description": "What to search for"}},
++                "properties": {
++                    "query": {"type": "string", "description": "Keywords, e.g. 'part-time annual leave'"},
++                },
+                 "required": ["query"],
++                "additionalProperties": False,
++            },
++        },
++    },
++    {
++        "type": "function",
++        "function": {
++            "name": "get_jurisdiction_rules",
++            "description": "Return the entitlement rule table for one jurisdiction and one topic: "
++                           "rule IDs with tenure bands and the number of days for each band.",
++            "parameters": {
++                "type": "object",
++                "properties": {
++                    "jurisdiction": {"type": "string", "enum": JURISDICTIONS},
++                    "topic": {"type": "string", "enum": TOPICS},
++                },
++                "required": ["jurisdiction", "topic"],
++                "additionalProperties": False,
+             },
+         },
+     },

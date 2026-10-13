@@ -1,0 +1,22 @@
+[
+  {"id": "Q01", "class": "single-lookup",   "question": "How many paid sick days is employee E106 entitled to this year?",
+   "expected_value": 5,    "expected_rule": "US-SL-1", "why": "US-CA sick leave has one band; no tenure branch"},
+  {"id": "Q02", "class": "tenure-branch",   "question": "E101 wants to resign. What notice period must they give, in days?",
+   "expected_value": 30,   "expected_rule": "IN-NP-2", "why": "18 months: past probation (6) but under 24 -> IN-NP-2"},
+  {"id": "Q03", "class": "tenure-branch",   "question": "What notice period in days applies if E104 resigns?",
+   "expected_value": 42,   "expected_rule": "UK-NP-2", "why": "80 months = 6 completed years; 7 x 6 = 42, inside [28, 84]"},
+  {"id": "Q04", "class": "tenure-branch",   "question": "How many annual leave days does E102 have left this year?",
+   "expected_value": 17,   "expected_rule": "IN-AL-3", "why": "88 months -> 24 days; + 3 carry-over - 10 taken (HB-4)"},
+  {"id": "Q05", "class": "tenure-branch",   "question": "How many paid sick days does E103 get?",
+   "expected_value": 10,   "expected_rule": "UK-SL-1", "why": "20 months < 24 -> UK-SL-1"},
+  {"id": "Q06", "class": "tenure-branch",   "question": "Is E107 entitled to any paid sick leave yet? Give the number of days.",
+   "expected_value": 0,    "expected_rule": "SG-SL-1", "why": "4 months < 6 -> SG-SL-1 (0 days)"},
+  {"id": "Q07", "class": "tenure-branch",   "question": "What is E105's annual leave entitlement for the year?",
+   "expected_value": 10,   "expected_rule": "US-AL-1", "why": "7 months < 12 -> US-AL-1"},
+  {"id": "Q08", "class": "part-time",       "question": "What is E109's annual leave entitlement in days?",
+   "expected_value": 16.5, "expected_rule": "UK-AL-2", "why": "53 months -> 28 days x 0.6 FTE = 16.8, rounded down to half day (HB-6)"},
+  {"id": "Q09", "class": "transfer",        "question": "E108 is relocating to the UK office on 1 November 2026. If they resign after the move, what notice period in days will apply?",
+   "expected_value": 28,   "expected_rule": "UK-NP-2", "why": "after transfer UK rules apply (HB-2); 37 months = 3 years -> 21, minimum 28. IN rule would give 60"},
+  {"id": "Q10", "class": "contractor",      "question": "How many annual leave days does E110 get?",
+   "expected_value": 0,    "expected_rule": "HB-3",    "why": "contractor -> handbook entitlements are 0 (HB-3); SG table alone would give 14"}
+]

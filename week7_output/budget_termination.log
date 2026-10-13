@@ -1,0 +1,42 @@
+2026-10-13 18:52:51,063 INFO ===== demo: tight max_iters budget =====
+2026-10-13 18:52:51,063 INFO START question='E108 is relocating to the UK office on 1 November 2026. If they resign after the move, what notice period in days will apply?' budget={'max_iters': 2, 'max_tokens': 20000, 'max_cost_usd': 0.003, 'max_wall_s': 90.0}
+2026-10-13 18:52:51,961 INFO lap 1: +572 tokens (prompt 541) -> total 572 tokens, $0.000050, 0.9s elapsed
+2026-10-13 18:52:51,961 INFO lap 1: tool get_employee_record({"employee_id":"E108"})
+2026-10-13 18:52:52,305 INFO lap 2: +717 tokens (prompt 683) -> total 1289 tokens, $0.000111, 1.2s elapsed
+2026-10-13 18:52:52,306 INFO lap 2: tool search_handbook({"query":"notice period"})
+2026-10-13 18:52:52,306 WARNING BUDGET FIRED: max_iters (2 laps done, limit 2) -> terminating cleanly before lap 3
+2026-10-13 18:52:52,306 INFO END status=budget:max_iters laps=2 tokens=1289 cost=$0.000111 latency=1.24s
+2026-10-13 18:52:52,306 INFO result status=budget:max_iters answer=None
+2026-10-13 18:53:12,306 INFO ===== demo: tight max_tokens budget =====
+2026-10-13 18:53:12,306 INFO START question='E108 is relocating to the UK office on 1 November 2026. If they resign after the move, what notice period in days will apply?' budget={'max_iters': 6, 'max_tokens': 3000, 'max_cost_usd': 0.003, 'max_wall_s': 90.0}
+2026-10-13 18:53:12,520 INFO lap 1: +572 tokens (prompt 541) -> total 572 tokens, $0.000050, 0.2s elapsed
+2026-10-13 18:53:12,520 INFO lap 1: tool get_employee_record({"employee_id":"E108"})
+2026-10-13 18:53:13,138 INFO lap 2: +717 tokens (prompt 683) -> total 1289 tokens, $0.000111, 0.8s elapsed
+2026-10-13 18:53:13,138 INFO lap 2: tool search_handbook({"query":"notice period"})
+2026-10-13 18:53:13,681 INFO lap 3: +923 tokens (prompt 884) -> total 2212 tokens, $0.000189, 1.4s elapsed
+2026-10-13 18:53:13,681 INFO lap 3: tool get_jurisdiction_rules({"jurisdiction":"UK","topic":"notice_period"})
+2026-10-13 18:53:13,681 WARNING BUDGET FIRED: max_tokens (used 2212 + next lap >= 923 > limit 3000) -> terminating cleanly before lap 4
+2026-10-13 18:53:13,681 INFO END status=budget:max_tokens laps=3 tokens=2212 cost=$0.000189 latency=1.37s
+2026-10-13 18:53:13,681 INFO result status=budget:max_tokens answer=None
+2026-10-13 18:53:33,682 INFO ===== demo: tight max_cost budget =====
+2026-10-13 18:53:33,682 INFO START question='E108 is relocating to the UK office on 1 November 2026. If they resign after the move, what notice period in days will apply?' budget={'max_iters': 6, 'max_tokens': 20000, 'max_cost_usd': 0.0002, 'max_wall_s': 90.0}
+2026-10-13 18:53:35,031 INFO lap 1: +572 tokens (prompt 541) -> total 572 tokens, $0.000050, 1.3s elapsed
+2026-10-13 18:53:35,032 INFO lap 1: tool get_employee_record({"employee_id":"E108"})
+2026-10-13 18:53:35,737 INFO lap 2: +714 tokens (prompt 683) -> total 1286 tokens, $0.000110, 2.1s elapsed
+2026-10-13 18:53:35,737 INFO lap 2: tool search_handbook({"query":"notice period"})
+2026-10-13 18:53:36,304 INFO lap 3: +923 tokens (prompt 884) -> total 2209 tokens, $0.000188, 2.6s elapsed
+2026-10-13 18:53:36,305 INFO lap 3: tool get_jurisdiction_rules({"jurisdiction":"UK","topic":"notice_period"})
+2026-10-13 18:53:36,305 WARNING BUDGET FIRED: max_cost (spent $0.000188 + next lap >= $0.000078 > limit $0.000200) -> terminating cleanly before lap 4
+2026-10-13 18:53:36,305 INFO END status=budget:max_cost laps=3 tokens=2209 cost=$0.000188 latency=2.62s
+2026-10-13 18:53:36,305 INFO result status=budget:max_cost answer=None
+2026-10-13 18:53:56,306 INFO ===== demo: tight wall_clock budget =====
+2026-10-13 18:53:56,307 INFO START question='E108 is relocating to the UK office on 1 November 2026. If they resign after the move, what notice period in days will apply?' budget={'max_iters': 6, 'max_tokens': 20000, 'max_cost_usd': 0.003, 'max_wall_s': 1.5}
+2026-10-13 18:53:56,871 INFO lap 1: +572 tokens (prompt 541) -> total 572 tokens, $0.000050, 0.6s elapsed
+2026-10-13 18:53:56,871 INFO lap 1: tool get_employee_record({"employee_id":"E108"})
+2026-10-13 18:53:57,055 INFO lap 2: +714 tokens (prompt 683) -> total 1286 tokens, $0.000110, 0.7s elapsed
+2026-10-13 18:53:57,056 INFO lap 2: tool search_handbook({"query":"notice period"})
+2026-10-13 18:53:57,538 INFO lap 3: +921 tokens (prompt 884) -> total 2207 tokens, $0.000188, 1.2s elapsed
+2026-10-13 18:53:57,538 INFO lap 3: tool get_jurisdiction_rules({"jurisdiction":"UK","topic":"notice_period"})
+2026-10-13 18:53:57,819 WARNING BUDGET FIRED: wall_clock (request timed out after 0.3s) -> terminating cleanly during lap 4
+2026-10-13 18:53:57,819 INFO END status=budget:wall_clock laps=3 tokens=2207 cost=$0.000188 latency=1.51s
+2026-10-13 18:53:57,819 INFO result status=budget:wall_clock answer=None
